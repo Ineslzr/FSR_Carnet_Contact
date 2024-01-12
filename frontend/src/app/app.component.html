@@ -1,0 +1,10 @@
+<mat-toolbar color="primary" *ngIf="!isLoginPage()">
+    <mat-toolbar-row>
+      <span>Carnet de contact</span>
+      <span class="example-spacer"></span>
+      <button class="btn btn-light m-2" routerLink="/contact">Contacts</button>
+      <button class="btn btn-light m-2" routerLink="/contact-group-list">Groupes</button>
+      <button class="btn btn-light m-2" routerLink="/">Déconnexion</button>
+    </mat-toolbar-row>
+</mat-toolbar>
+<router-outlet></router-outlet>

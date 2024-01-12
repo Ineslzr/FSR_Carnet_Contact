@@ -1,0 +1,111 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6 justify-content-center align-items-center flex-wrap">
+      <div class=" m-3 border rounded-bottom h-100 bg-light shadow">
+        <div class="text-center w-100 mb-3">
+            <p>
+                <mat-toolbar class="border-bottom" color="light">
+                    <span>Liste de vos contacts</span>
+                    <span class="example-spacer"></span>
+                    <button  class="btn shadow-none" (click)="redirectToAddContact()" aria-label="Example icon-button with heart icon">
+                        <i class="bi bi-plus-circle-fill text-info h5"></i>
+                    </button>
+                </mat-toolbar>
+              </p>
+        </div>
+        
+        <div class="card mb-3 mx-auto shadow" style="max-width: 600px;" *ngFor="let contact of contacts" >
+            <div class="card-body d-flex justify-content-between align-items-center">
+                <div>
+                    <h5 class="card-title">{{ contact.firstName }} {{ contact.lastName }}</h5>
+                    <p class="card-text">{{ contact.email }}</p>
+                </div>           
+                <div>
+                    <button type="button" (click)="deleteContact(contact.idContact)" class="btn btn-danger me-2"><i class="bi bi-trash"></i></button>
+                    <button type="button" (click)="findContact(contact.idContact)" class="btn btn-primary"><i class="bi bi-pencil-fill" ></i></button>
+                </div>
+            </div>
+        </div>
+      </div>
+      
+  </div>
+
+    <div class="col-md-6 d-flex align-items-center justify-content-center">
+      <form [formGroup]="contactForm" class="p-4" (ngSubmit)="onSubmit(contactId)">
+        <div class="row mb-3">
+            <div class="col-md-12 text-center">
+                <h4 class="font-weight-bold">Informations personnelles</h4>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-4">
+                <label for="inputFirstname" class="form-label">Prénom</label>
+                <input type="text" class="form-control" id="inputFirstname" placeholder="Prénom" formControlName="firstName" required>
+            </div>
+            <div class="col-md-4">
+                <label for="inputLastname" class="form-label">Nom</label>
+                <input type="text" class="form-control" id="inputLastname" placeholder="Nom" formControlName="lastName" required>
+            </div>
+            <div class="col-md-4">
+                <label for="inputEmail" class="form-label">Email</label>
+                <input type="email" class="form-control" id="inputEmail" placeholder="Email" formControlName="email" required>
+            </div>
+        </div>
+    
+        <hr class="hr hr-blurry" />
+        <div class="row mb-3">
+            <div class="col-md-12 text-center">
+                <h4 class="font-weight-bold">Adresse</h4>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="inputStreet" class="form-label">Rue</label>
+            <input type="text" class="form-control" id="inputStreet" placeholder="Rue" formControlName="street">
+        </div>
+        <div class="row g-3">
+            <div class="col-md-5 mb-3">
+                <label for="inputCity" class="form-label">Ville</label>
+                <input type="text" class="form-control" id="inputCity" placeholder="Ville" formControlName="city">
+            </div>
+            <div class="col-md-4 mb-3">
+                <label for="inputCountry" class="form-label">Pays</label>
+                <input type="text" class="form-control" id="inputCountry" placeholder="Pays" formControlName="country">
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="inputZip" class="form-label">Code Postal</label>
+                <input type="text" class="form-control" id="inputZip" placeholder="Code postal" formControlName="zip">
+            </div>
+        </div>
+    
+        <hr class="hr hr-blurry" />
+        <div class="row mb-3">
+            <div class="col-md-12 text-center">
+                <h4 class="font-weight-bold">Téléphone(s)</h4>               
+            </div>
+            <button type="button" (click)="addPhone(null,'','')" class="btn btn-link"><i class="bi bi-plus-circle-fill bi-lg"></i></button>
+        </div>
+    
+        <div formArrayName="phones">
+            <div *ngFor="let phone of phoneControls; let i = index" [formGroupName]="i">
+                <div class="mb-3">
+                    <label for="inputPhonekind" class="form-label">Type de téléphone</label>
+                    <input type="text" class="form-control" id="inputPhonekind" formControlName="phoneKind">
+                </div>
+    
+                <div class="mb-3">
+                    <label for="inputPhonenumber" class="form-label">Numéro de téléphone</label>
+                    <input type="text" class="form-control" id="inputPhonenumber" formControlName="phoneNumber">
+                </div>
+                <button type="button" (click)="deletePhoneNumber(phone.value.idPhoneNumber, contactId)" class="btn btn-danger me-2"><i class="bi bi-trash"></i></button>
+            </div>
+        </div>
+         
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary" [disabled]="contactForm.invalid">Modifier</button>
+        </div>
+    </form>   
+    </div>
+  </div>
+</div>
+
+  

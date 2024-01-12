@@ -1,0 +1,91 @@
+<div class="container d-flex align-items-center justify-content-center">
+		<div class="card mx-auto p-4 rounded-bottom mt-5">
+			<div class="bg-secondary text-center py-2 mb-0">
+			<h2 class="text-white font-weight-bold">Ajouter un contact</h2>
+			</div>
+			<form [formGroup]="contactForm" class="p-4" (ngSubmit)="onSubmit()">
+				<div class="row mb-3">
+					<div class="col-md-12 text-center">
+					<h4 class="font-weight-bold">Informations personnelles</h4>
+					</div>
+				</div>
+			<div class="row mb-3 ">
+				<div class="col-md-4">
+				<label for="inputFirstname" class="form-label">Prénom</label>
+				<input type="text" class="form-control" id="inputFirstname" placeholder="Prénom" formControlName="firstName" required>
+				</div>
+		
+				<div class="col-md-4">
+				<label for="inputLastname" class="form-label">Nom</label>
+				<input type="text" class="form-control" id="inputLastname" placeholder="Nom" formControlName="lastName" required>
+				</div>
+		
+				<div class="col-md-4">
+				<label for="inputEmail" class="form-label">Email</label>
+				<input type="email" class="form-control" id="inputEmail" placeholder="Email" formControlName="email" required>
+				</div>
+			</div>
+		
+			<hr class="hr hr-blurry" />
+			<div class="row mb-3">
+				<div class="col-md-12 text-center">
+				<h4 class="font-weight-bold">Adresse</h4>
+				</div>
+			</div>
+		
+			<div class="mb-3">
+				<label for="inputStreet" class="form-label">Rue</label>
+				<input type="text" class="form-control" id="inputStreet" placeholder="Rue" formControlName="street">
+			</div>
+		
+			<div class="row g-3">
+				<div class="col-md-5 mb-3">
+					<label for="inputCity" class="form-label">Ville</label>
+					<input type="text" class="form-control" id="inputCity" placeholder="Ville" formControlName="city">
+				</div>
+			
+				<div class="col-md-4 mb-3">
+					<label for="inputCountry" class="form-label">Pays</label>
+					<input type="text" class="form-control" id="inputCountry" placeholder="Pays" formControlName="country">
+				</div>
+				<div class="col-md-3 mb-3">
+					<label for="inputZip" class="form-label">Code Postal</label>
+					<input type="text" class="form-control" id="inputZip" placeholder="Code postal" formControlName="zip">
+				</div>
+			</div>
+		
+			<hr class="hr hr-blurry" />
+			<div class="row mb-3">
+				<div class="col-md-12 text-center">
+				<h4 class="font-weight-bold">Téléphone(s)</h4>
+				</div>
+			</div>
+		
+			<div formArrayName="phones">
+				<div *ngFor="let phone of phoneControls; let i = index" [formGroupName]="i">
+				<div class="mb-3">
+					<label for="inputPhonekind" class="form-label">Type de téléphone</label>
+					<input type="text" class="form-control" id="inputPhonekind" formControlName="phoneKind">
+				</div>
+			
+				<div class="mb-3">
+					<label for="inputPhonenumber" class="form-label">Numéro de téléphone</label>
+					<input type="text" class="form-control" id="inputPhonenumber" formControlName="phoneNumber">
+				</div>
+				
+				</div>
+			</div>
+			
+			<div class="col-md-6">
+				<button type="button" (click)="addPhone()" class="btn btn-link"><i class="bi bi-plus-circle-fill bi-lg"></i></button>
+			</div>
+
+			<hr class="hr hr-blurry" />
+			<div class="text-center">
+				<button type="submit" class="btn btn-primary text-center" [disabled]="contactForm.invalid">Ajouter</button>
+			</div>
+			</form>
+		</div>
+
+</div>
+  
